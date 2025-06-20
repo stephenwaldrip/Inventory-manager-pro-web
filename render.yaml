@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: inventory-manager-pro-server
+    env: node
+    buildCommand: cd server && npm install
+    startCommand: node server.js
+    envVars:
+      - key: MONGO_URI
+        sync: false
+      - key: PORT
+        value: 5000
+    autoDeploy: true
+
+  - type: web
+    name: inventory-manager-pro-client
+    env: static
+    buildCommand: cd client && npm install && npm run build
+    staticPublishPath: client/build
+    autoDeploy: true
